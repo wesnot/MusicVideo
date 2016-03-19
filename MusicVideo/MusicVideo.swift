@@ -15,6 +15,13 @@ class Videos {
     private var _vName:String
     private var _vImageUrl:String
     private var _vVideoUrl:String
+    private var _vRights:String
+    private var _vPrice:String
+    private var _vArtist:String
+    private var _vImid:String
+    private var _vGenre:String
+    private var _vLinkToiTunes:String
+    private var _vReleaseDte:String
     
     //Make a Getter
     
@@ -30,6 +37,34 @@ class Videos {
     
     var vVideoUrl: String {
         return _vVideoUrl
+    }
+    
+    var vRights: String {
+        return _vRights
+    }
+    
+    var vPrice: String {
+        return _vPrice
+    }
+    
+    var vArtist: String {
+        return _vArtist
+    }
+    
+    var vImid: String {
+        return _vImid
+    }
+    
+    var vGenre: String {
+        return _vGenre
+    }
+    
+    var vLinkToiTunes: String {
+        return _vLinkToiTunes
+    }
+    
+    var vReleaseDte: String {
+        return _vReleaseDte
     }
     
     
@@ -78,7 +113,100 @@ class Videos {
         {
             _vVideoUrl = ""
         }
-    
+        
+        
+        //Video Rights
+        if let rights = data["rights"] as? JSONDictionary,
+            vRights = rights["label"] as? String {
+                self._vRights = vRights
+                
+        }
+        else
+        {
+            _vRights = ""
+        }
+       
+        
+        //Video Price
+        if let price = data["im:price"] as? JSONDictionary,
+            vPrice = price["label"] as? String {
+                self._vPrice = vPrice
+                
+        }
+        else
+        {
+            _vPrice = ""
+        }
+        
+
+        //Artist Name
+        if let artist = data["im:artist"] as? JSONDictionary,
+            vArtist = artist["label"] as? String {
+                self._vArtist = vArtist
+                
+        }
+        else
+        {
+            _vArtist = ""
+        }
+        
+        
+        
+        //Video im ID
+        if let imid = data["id"] as? JSONDictionary,
+            vImid = imid["attributes"] as? String {
+                self._vImid = vImid
+                
+        }
+        else
+        {
+            _vImid = ""
+        }
+        
+        
+        //Video genre
+        if let genre = data["category"] as? JSONDictionary,
+            videoGenre = genre["attributes"] as? JSONDictionary,
+            vVideogenre = videoGenre["term"] as? String {
+                self._vGenre = vVideogenre
+                
+        }
+        else
+        {
+            _vGenre = ""
+        }
+        
+        
+        //link to iTunes
+        if let iTunes = data["id"] as? JSONDictionary,
+            viTunesLink = iTunes["label"] as? String {
+                self._vLinkToiTunes = viTunesLink
+                
+        }
+        else
+        {
+            _vLinkToiTunes = ""
+        }
+        
+        
+        
+        //Video Release Date
+        if let release = data["im:releaseDate"] as? JSONDictionary,
+            rdate = release["attributes"] as? JSONDictionary,
+            vReleaseDate = rdate["label"] as? String {
+                self._vReleaseDte = vReleaseDate
+                
+        }
+        else
+        {
+            _vReleaseDte = ""
+        }
+        
+        
+
+        
+
+        
     }
     
 }
