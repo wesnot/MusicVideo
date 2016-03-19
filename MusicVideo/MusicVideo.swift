@@ -23,6 +23,9 @@ class Videos {
     private var _vLinkToiTunes:String
     private var _vReleaseDte:String
     
+    //this Variable gets created from the UI
+    var vImageData:NSData?
+    
     //Make a Getter
     
     var vName: String{
@@ -115,7 +118,7 @@ class Videos {
         }
         
         
-        //Video Rights
+        //Video Rights Studio name
         if let rights = data["rights"] as? JSONDictionary,
             vRights = rights["label"] as? String {
                 self._vRights = vRights
@@ -154,7 +157,8 @@ class Videos {
         
         //Video im ID
         if let imid = data["id"] as? JSONDictionary,
-            vImid = imid["attributes"] as? String {
+            vid = imid["attributes"] as? JSONDictionary,
+            vImid = vid["im:id"] as? String {
                 self._vImid = vImid
                 
         }
@@ -166,9 +170,9 @@ class Videos {
         
         //Video genre
         if let genre = data["category"] as? JSONDictionary,
-            videoGenre = genre["attributes"] as? JSONDictionary,
-            vVideogenre = videoGenre["term"] as? String {
-                self._vGenre = vVideogenre
+            rel2 = genre["attributes"] as? JSONDictionary,
+            vGenre = rel2["term"] as? String {
+                self._vGenre = vGenre
                 
         }
         else
@@ -178,9 +182,9 @@ class Videos {
         
         
         //link to iTunes
-        if let iTunes = data["id"] as? JSONDictionary,
-            viTunesLink = iTunes["label"] as? String {
-                self._vLinkToiTunes = viTunesLink
+        if let release2 = data["id"] as? JSONDictionary,
+            vLinkToiTunes = release2["label"] as? String {
+                self._vLinkToiTunes = vLinkToiTunes
                 
         }
         else
@@ -191,10 +195,10 @@ class Videos {
         
         
         //Video Release Date
-        if let release = data["im:releaseDate"] as? JSONDictionary,
-            rdate = release["attributes"] as? JSONDictionary,
-            vReleaseDate = rdate["label"] as? String {
-                self._vReleaseDte = vReleaseDate
+        if let release2 = data["im:releaseDate"] as? JSONDictionary,
+            rel2 = release2["attributes"] as? JSONDictionary,
+            vReleaseDte = rel2["label"] as? String {
+                self._vReleaseDte = vReleaseDte
                 
         }
         else
